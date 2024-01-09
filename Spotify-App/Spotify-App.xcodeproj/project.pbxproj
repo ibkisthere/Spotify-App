@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EBF36A22B4D0CA10045CB8C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBF36A12B4D0CA10045CB8C /* Extension.swift */; };
 		4EDE541F2B460AE2003EC142 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE541E2B460AE2003EC142 /* AppDelegate.swift */; };
 		4EDE54212B460AE2003EC142 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE54202B460AE2003EC142 /* SceneDelegate.swift */; };
 		4EDE54232B460AE2003EC142 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE54222B460AE2003EC142 /* HomeViewController.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4EBF36A12B4D0CA10045CB8C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4EDE541B2B460AE2003EC142 /* Spotify-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EDE541E2B460AE2003EC142 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EDE54202B460AE2003EC142 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				4EDE54272B460AE5003EC142 /* Assets.xcassets */,
 				4EDE541E2B460AE2003EC142 /* AppDelegate.swift */,
 				4EDE54202B460AE2003EC142 /* SceneDelegate.swift */,
+				4EBF36A12B4D0CA10045CB8C /* Extension.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				4EDE54552B4625F5003EC142 /* TabBarViewController.swift in Sources */,
 				4EDE54232B460AE2003EC142 /* HomeViewController.swift in Sources */,
 				4EDE54732B462983003EC142 /* AudioTrack.swift in Sources */,
+				4EBF36A22B4D0CA10045CB8C /* Extension.swift in Sources */,
 				4EDE545D2B4626CA003EC142 /* AuthViewController.swift in Sources */,
 				4EDE541F2B460AE2003EC142 /* AppDelegate.swift in Sources */,
 				4EDE545A2B462686003EC142 /* LibraryViewController.swift in Sources */,
