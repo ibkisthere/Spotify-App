@@ -27,12 +27,36 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
         view.backgroundColor = .systemBackground
         webView.navigationDelegate = self
         view.addSubview(webView)
-        // Do any additional setup after loading the view.
+        guard let url = AuthManager.shared.signInUrl else {
+            return
+        }
+        ///wrapping it in  DispatchQueue.main.async doesn't change anything , i still get the warning "This method should not be called on the main thread as it may lead to UI unresponsiveness. apparently its an Xcode 14 bug "
+        webView.load(URLRequest(url: url))
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         webView.frame = view.bounds
     }
-
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        guard let url = webView.url else {
+            return
+        }
+        guard let code = URLComponents(string: url.absoluteString)?.queryItems?.first(where:{$0.name == "code"
+        })?.value
+        else {
+            return
+        }
+        webView.isHidden = true
+        AuthManager.shared.exchangeCodeForToken(code: code) {[weak self] success in
+            DispatchQueue.main.async {
+                self?.navigationController?.popToRootViewController(animated: true)
+                self?.completionHandler?(success)
+            }
+        }
+        print("Code: \(code)")
+    }
 }
+
