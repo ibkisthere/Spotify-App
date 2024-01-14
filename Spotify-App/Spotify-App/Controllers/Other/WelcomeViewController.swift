@@ -14,7 +14,6 @@ class WelcomeViewController: UIViewController {
         button.backgroundColor = .white
         button.setTitle("Sign in with spotify", for: .normal)
         button.setTitleColor(.blue, for: .normal)
-        button
         return button
         
     }()
