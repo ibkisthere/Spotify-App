@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E94FF792B57B91E00DE6484 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E94FF782B57B91E00DE6484 /* AuthResponse.swift */; };
+		4EB01BA02BAD4C1F0041C63F /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB01B9F2BAD4C1F0041C63F /* SettingsModel.swift */; };
 		4EBF36A22B4D0CA10045CB8C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBF36A12B4D0CA10045CB8C /* Extension.swift */; };
 		4EDE541F2B460AE2003EC142 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE541E2B460AE2003EC142 /* AppDelegate.swift */; };
 		4EDE54212B460AE2003EC142 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE54202B460AE2003EC142 /* SceneDelegate.swift */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E94FF782B57B91E00DE6484 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		4EB01B9F2BAD4C1F0041C63F /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		4EBF36A12B4D0CA10045CB8C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		4EDE541B2B460AE2003EC142 /* Spotify-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spotify-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EDE541E2B460AE2003EC142 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				4EDE54722B462983003EC142 /* AudioTrack.swift */,
 				4EDE54742B462991003EC142 /* Artist.swift */,
 				4EDE54762B46299F003EC142 /* UserProfile.swift */,
+				4E94FF782B57B91E00DE6484 /* AuthResponse.swift */,
+				4EB01B9F2BAD4C1F0041C63F /* SettingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,9 +386,11 @@
 				4EDE54632B4626FD003EC142 /* ProfileViewController.swift in Sources */,
 				4EDE54552B4625F5003EC142 /* TabBarViewController.swift in Sources */,
 				4EDE54232B460AE2003EC142 /* HomeViewController.swift in Sources */,
+				4E94FF792B57B91E00DE6484 /* AuthResponse.swift in Sources */,
 				4EDE54732B462983003EC142 /* AudioTrack.swift in Sources */,
 				4EBF36A22B4D0CA10045CB8C /* Extension.swift in Sources */,
 				4EDE545D2B4626CA003EC142 /* AuthViewController.swift in Sources */,
+				4EB01BA02BAD4C1F0041C63F /* SettingsModel.swift in Sources */,
 				4EDE541F2B460AE2003EC142 /* AppDelegate.swift in Sources */,
 				4EDE545A2B462686003EC142 /* LibraryViewController.swift in Sources */,
 				4EDE54772B46299F003EC142 /* UserProfile.swift in Sources */,

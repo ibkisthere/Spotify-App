@@ -56,7 +56,6 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
                 self?.completionHandler?(success)
             }
         }
-        print("Code: \(code)")
     }
 }
 
