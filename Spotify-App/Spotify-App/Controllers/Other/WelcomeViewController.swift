@@ -15,7 +15,6 @@ class WelcomeViewController: UIViewController {
         button.setTitle("Sign in with spotify", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         return button
-        
     }()
     override func viewDidLoad() {
         super.viewDidLoad()

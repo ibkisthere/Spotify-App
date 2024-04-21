@@ -34,7 +34,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                     self?.viewProfile()
                 }
         })]))
-        sections.append(Section(title:"Acccount", options: [Option(title: "View your Profile", handler: {
+        sections.append(Section(title:"Account", options: [Option(title: "Sign Out", handler: {
             [weak self] in
                 DispatchQueue.main.async {
                     self?.signOutTapped()
@@ -75,6 +75,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.text = model.title
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = sections[indexPath.section].options[indexPath.row]
@@ -86,3 +87,4 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         return model.title
     }
 }
+

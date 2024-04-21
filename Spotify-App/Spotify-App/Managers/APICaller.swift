@@ -33,11 +33,32 @@ final class APICaller {
                 }
                 
                 do {
-                    let result = try JSONDecoder().decode(UserProfile.self, from: data)
-                    print(result)
+                    let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                    print("this is the result \(result)")
                 }
                 catch {
-                    print(error.localizedDescription)
+                    print("this is the error \(error)")
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    public func getnewReleases(completion: @escaping ((Result<String,Error>))-> Void) {
+        createRequest(with: URL(string: Constants.baseAPIURL + "/browse/new-releases?limit=50"), type: .GET) {
+            request in
+            let task = URLSession.shared.dataTask(with: request){
+                data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options:.allowFragments)
+                    print("this is the json here \(json)")
+                }
+                catch {
                     completion(.failure(error))
                 }
             }

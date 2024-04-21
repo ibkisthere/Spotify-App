@@ -23,7 +23,7 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "sign in "
+        title = "sign in"
         view.backgroundColor = .systemBackground
         webView.navigationDelegate = self
         view.addSubview(webView)
