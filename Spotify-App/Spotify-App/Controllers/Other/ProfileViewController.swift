@@ -38,7 +38,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         APICaller.shared.getCurrentUserProfile {
             [weak self] result in
             DispatchQueue.main.async {
-                print("this is the result hereeee \(result)")
                 switch result {
                 case .success(let model):
                     self?.updateUI(with: model)
@@ -57,7 +56,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         models.append("Email Address: \(model.email)")
         models.append("User ID: \(model.id)")
         models.append("Plan: \(model.product)")
-        createTableHeader(with: model.images.first?.url) 
+        createTableHeader(with: model.images.first?.url ?? "")
         tableView.reloadData()
     }
     
@@ -102,7 +101,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Foo"
+        cell.textLabel?.text = models[indexPath.row]
         cell.selectionStyle = .none
         return cell
     }
