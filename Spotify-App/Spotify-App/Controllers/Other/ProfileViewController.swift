@@ -60,6 +60,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.reloadData()
     }
     
+    //TODO use autolayout here too
     private func createTableHeader(with urlString:String?) {
         guard let urlString, let url = URL(string: urlString) else {
             return

@@ -33,9 +33,9 @@ final class APICaller {
                 }
                 
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+
                     let result = try JSONDecoder().decode(UserProfile.self, from: data)
-                    print("this is the result \(result)")
+//                    print("this is the result \(result)")
                     completion(.success(result))
                 }
                 catch { 
@@ -58,7 +58,7 @@ final class APICaller {
                 }
                 do {
                     let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
-                    print("this is the json here \(result)")
+//                    print("this is the json here \(result)")
                     completion(.success(result))
                 }
                 catch {
@@ -80,8 +80,7 @@ final class APICaller {
                 }
                 do {
                     let result = try JSONDecoder().decode(FeaturedPlaylistsResponse.self, from: data)
-                    let json = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    print("this is the json here \(result)")
+//                    print("this is the json here \(result)")
                     completion(.success(result))
                 }
                 catch {
@@ -92,11 +91,11 @@ final class APICaller {
         }
     }
     
-    public func getRecommendations(genres: Set<String>, completion: @escaping ((Result<String,Error>))-> Void) {
+    public func getRecommendations(genres: Set<String>, completion: @escaping ((Result<RecommendationsResponse,Error>))-> Void) {
         let seeds = genres.joined(separator: ",")
-        createRequest(with: URL(string: Constants.baseAPIURL + "/recommendations?seed_genres=\(seeds)"), type: .GET) {
+        print()
+        createRequest(with: URL(string: Constants.baseAPIURL + "/recommendations?limit=20&seed_genres=\(seeds)"), type: .GET) {
             request in
-//            print(request.url?.absoluteString)
             let task = URLSession.shared.dataTask(with: request){
                 data, _, error in
                 guard let data = data, error == nil else {
@@ -104,10 +103,10 @@ final class APICaller {
                     return
                 }
                 do {
-//                let json = try JSONDecoder().decode(String.self, from: data)
-                  let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                    print("this is the json here \(result)")
-//                    completion(.success(result))
+                    let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
+//                    let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                      print("this is the json here \(result)")
+                      completion(.success(result))
                 }
                 catch {
                     completion(.failure(error))
@@ -129,7 +128,6 @@ final class APICaller {
                 }
                 do {
                     let result = try JSONDecoder().decode(RecommendedGenresResponse.self, from: data)
-                    print("this is the json here \(result)")
                     completion(.success(result))
                 }
                 catch {
@@ -165,6 +163,5 @@ final class APICaller {
             completion(request)
         }
     }
-    
     
 }
