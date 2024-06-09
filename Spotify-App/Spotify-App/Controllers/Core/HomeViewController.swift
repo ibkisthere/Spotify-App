@@ -30,22 +30,22 @@ class HomeViewController: UIViewController {
     
     private let spinner:UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView()
-        spinner.tintColor = .white
+        spinner.tintColor = .label
         spinner.hidesWhenStopped = true
         return spinner
     }()
         
     private var sections = [BrowseSectionType]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Spinner.start(style: .medium, backgroundColor: UIColor.white, color: UIColor.red)
         title = "Home"
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .done, target: self, action: #selector(didTapSettings))
         configureCollectionView()
-        view.addSubview(spinner)
         fetchData()
+        Spinner.stop()
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,7 +78,7 @@ class HomeViewController: UIViewController {
         var featuredPlaylist:FeaturedPlaylistsResponse?
         var recommendations:RecommendationsResponse?
         
-        APICaller.shared.getnewReleases {
+        APICaller.shared.getNewReleases {
             // when we've left the scope of the block , we decrement the number of blocks we have left
             result in
             defer {
@@ -264,14 +264,6 @@ extension HomeViewController:UICollectionViewDelegate, UICollectionViewDataSourc
         collectionView.deselectItem(at: indexPath, animated: true)
         let section = sections[indexPath.section]
         switch section {
-        case .featuredPlaylists:
-            let playlist = playlists[indexPath.row]
-            let vc = PlaylistViewController(playlist:playlist)
-            vc.title = playlist.name
-            vc.navigationItem.largeTitleDisplayMode = .never
-            navigationController?.pushViewController(vc, animated: true)
-            break
-            break
         case .newReleases:
             // we want the nth element at that position
             let album = newAlbums[indexPath.row]
@@ -280,12 +272,16 @@ extension HomeViewController:UICollectionViewDelegate, UICollectionViewDataSourc
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
             break
+        case .featuredPlaylists:
+            let playlist = playlists[indexPath.row]
+            let vc = PlaylistViewController(playlist:playlist)
+            vc.title = playlist.name
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+            break
         case .recommendedTracks:
-//            let album = newAlbums[indexPath.row]
-//            let vc = PlayListViewController(album: album)
-//            vc.title = album.name
-//            vc.navigationItem.largeTitleDisplayMode = .never
-//            navigationController?.pushViewController(vc, animated: true)
+            let track = tracks[indexPath.row]
+            PlaybackPresenter.shared.startPlayback(from: self, track: track)
             break
         }
     }

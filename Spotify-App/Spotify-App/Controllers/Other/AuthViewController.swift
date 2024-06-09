@@ -15,7 +15,6 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
         let config = WKWebViewConfiguration()
         config.defaultWebpagePreferences = prefs
         let webView = WKWebView(frame: .zero, configuration: config)
-        
         return webView
     }()
     
@@ -30,7 +29,6 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
         guard let url = AuthManager.shared.signInUrl else {
             return
         }
-        ///wrapping it in  DispatchQueue.main.async doesn't change anything , i still get the warning "This method should not be called on the main thread as it may lead to UI unresponsiveness. apparently its an Xcode 14 bug "
         webView.load(URLRequest(url: url))
         
     }

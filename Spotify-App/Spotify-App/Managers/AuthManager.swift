@@ -8,6 +8,7 @@
 import Foundation
 
 
+//Rewrite AuthManager class to conform to that spotify API
 final class AuthManager {
     static let shared = AuthManager()
     
@@ -15,7 +16,7 @@ final class AuthManager {
     
     struct Constants {
         static let clientID = "6a7e06071f03419c8c4d582b759f469e"
-        /// ideally we would put the client secret in our backend 
+        /// ideally we would put the client secret in our backend
         static let clientSecret = "956e7a857e8045f6980ad552d33d2c68"
         static let tokenAPIURL = "https://accounts.spotify.com/api/token"
         static let redirectURI = "https://www.github.com/thisisibukunoluwa/"
@@ -44,26 +45,18 @@ final class AuthManager {
         return UserDefaults.standard.object(forKey: "expiration_date") as? Date
     }
     private var shouldRefreshToken :Bool {
-        //should refresh token is giving me false even with this condition, so it does and early return
-        // when i print the expirationdate it gives me nil
-//        print("this is the expiration date \(String(describing: tokenExpirationDate))")
+        ///should refresh token is giving me false even with this condition, so it does and early return
         guard let expirationDate = tokenExpirationDate else {
             return false
         }
-       // the date is giving me my local date one hour behind, i'll add one hour to it as a temporary fix
-        //- it works
+       /// the error was that the date the Date() object s giving me my local date one hour behind, i'll add one hour to it as a temporary fix
         let currentDate = Date().addingTimeInterval(3600)
         let fiveMinutes: TimeInterval = 300
-//
-//        print("this is the current date \(String(describing:currentDate))")
-//        print("this is the  date \(String(describing: currentDate.addingTimeInterval(fiveMinutes)))")
-//        print("this is the expiration date \(String(describing: tokenExpirationDate))")
-//
         return currentDate.addingTimeInterval(fiveMinutes) >= expirationDate
     }
     
     public func exchangeCodeForToken(code:String, completion: @escaping ((Bool)-> Void)) {
-        // we are going to make an api call to get token
+        /// we are going to make an api call to get token
         guard let url = URL(string:Constants.tokenAPIURL) else {
             return
         }
@@ -100,7 +93,6 @@ final class AuthManager {
             
             do {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
-//                print("hello i am the result, i am here \(result.access_token) \(result.expires_in) \(result.token_type) \(result.refresh_token)")
                 self?.cacheToken(result:result)
                 completion(true)
             }
@@ -122,8 +114,7 @@ final class AuthManager {
             return
         }
         if shouldRefreshToken {
-            // Refresh
-            // print("yes i refreshed")
+            /// Refresh
             refreshIfNeeded { [weak self] success in
                     if let token = self?.accessToken, success {
                         completion(token)
@@ -154,9 +145,7 @@ final class AuthManager {
         }
         
         refreshingToken = true
-        
-//        print("i am refreshing here in the refreshIfNeeded")
-        
+
         var components = URLComponents()
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "refresh_token"),
@@ -191,8 +180,7 @@ final class AuthManager {
                     $0(result.access_token)
                 }
                 self?.onRefreshBlocks.removeAll()
-                self?.cacheToken(result:result) 
-//                print("SUCCESS:\(result)")
+                self?.cacheToken(result:result)
                 completion?(true)
             }
             catch {

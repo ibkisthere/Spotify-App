@@ -11,6 +11,7 @@ class WelcomeViewController: UIViewController {
     
     private let signInButton:UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .white
         button.setTitle("Sign in with spotify", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -19,19 +20,21 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Spotify"
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .black
         view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
+        setupConstraints()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        signInButton.frame = CGRect(
-            x: 20,
-            y: view.height - 50 - view.safeAreaInsets.bottom,
-            width: view.width - 40,
-            height: 50
-        )
+    
+    private func setupConstraints(){
+        NSLayoutConstraint.activate([
+            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            signInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            signInButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
+    
     
     @objc func didTapSignIn () {
         let vc = AuthViewController()
@@ -43,6 +46,7 @@ class WelcomeViewController: UIViewController {
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+    
     private func handleSignIn(success: Bool) {
         guard success else {
             let alert = UIAlertController(title:"Oops", message: "Something went wrong when signing in.", preferredStyle: .alert)

@@ -11,6 +11,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self,forCellReuseIdentifier: "cell")
         return tableView
     }()
@@ -58,7 +59,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+//        tableView.frame = view.bounds
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+        ])
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

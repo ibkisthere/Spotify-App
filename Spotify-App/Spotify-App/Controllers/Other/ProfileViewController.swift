@@ -56,7 +56,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         models.append("Email Address: \(model.email)")
         models.append("User ID: \(model.id)")
         models.append("Plan: \(model.product)")
-        createTableHeader(with: model.images.first?.url ?? "")
+        // if theres no profile picture just use this image of a rose
+        createTableHeader(with: model.images.first?.url ??  "https://images.pexels.com/photos/74512/pexels-photo-74512.jpeg")
         tableView.reloadData()
     }
     
@@ -66,25 +67,31 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             return
         }
         
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width / 1.5))
+        let headerView = UIView()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         
-        let imageSize : CGFloat = headerView.height / 2
-        
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageSize, height: imageSize))
-        
-        headerView.addSubview(imageView)
-        
-        imageView.center = headerView.center
-        
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        
         imageView.sd_setImage(with: url, completed: nil)
-        
         imageView.layer.masksToBounds = true
-        
-        imageView.layer.cornerRadius = imageSize / 2
-        
+        headerView.addSubview(imageView)
         tableView.tableHeaderView = headerView
+        
+        NSLayoutConstraint.activate([
+            headerView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            headerView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalTo: headerView.heightAnchor, multiplier: 0.5),
+            imageView.heightAnchor.constraint(equalTo: headerView.heightAnchor, multiplier: 0.5)
+        ])
+        
+        headerView.layoutIfNeeded()
+        imageView.layer.cornerRadius = imageView.frame.size.width / 2
     }
     
     private func failedToGetProfile() {
